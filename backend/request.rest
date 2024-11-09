@@ -1,4 +1,28 @@
+### Melihat seluruh data
 GET http://localhost:5000/users
 
-###
+### Melihat satu data berdasarkan id
 GET http://localhost:5000/users/1
+
+### Menambahkan data
+POST http://localhost:5000/users
+Content-Type: application/json
+
+{
+  "name": "Jhon Doe",
+  "email": "jhon@gmail.com",
+  "gender": "Male"
+}
+
+### Mengubah data
+PATCH http://localhost:5000/users/1
+Content-Type: application/json
+
+{
+  "name": "M Fikri",
+  "email": "mfikri@gmail.com",
+  "gender": "Male"
+}
+
+### Menghapus data
+DELETE http://localhost:5000/users/3
