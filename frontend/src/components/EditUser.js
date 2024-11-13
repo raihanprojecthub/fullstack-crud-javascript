@@ -1,6 +1,6 @@
 import React,{useEffect, useState} from 'react';
 import axios from 'axios';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 const EditUser = () => {
 const [name, setName] = useState("");
@@ -63,6 +63,7 @@ const getUserById = async () =>{
           </div>
           <div className="field">
             <button className="submit button is-success">Update</button>
+            <Link to={`/`} className="submit button is-danger ml-1">Back</Link>
           </div>
         </form>
       </div>

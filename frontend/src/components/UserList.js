@@ -26,7 +26,7 @@ const deleteUser = async (id) =>{
   return (
     <div className="columns mt-5 is-centered">
       <div className="column is-half">
-        <Link to={`add`} className="button is-success">Add New</Link>
+        <Link to={`add`} className="button is-small is-success">Add New</Link>
         <table className="table is-staped is-fullwidth">
           <thead>
             <tr>
@@ -46,7 +46,7 @@ const deleteUser = async (id) =>{
                 <td>{user.gender}</td>
                 <td>
                   <Link to={`edit/${user.id}`} className='button is-small is-info'>Edit</Link>
-                  <button onClick={()=> deleteUser(user.id)} className='button is-small is-danger'>Delete</button>
+                  <button onClick={()=> deleteUser(user.id)} className='button is-small is-danger ml-1'>Delete</button>
                 </td>
               </tr>
             ))}

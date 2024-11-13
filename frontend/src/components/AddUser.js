@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const AddUser = () => {
 const [name, setName] = useState("");
@@ -51,6 +51,7 @@ const saveUser = async (e) =>{
           </div>
           <div className="field">
             <button className="submit button is-success">Save</button>
+            <Link to={`/`} className="submit button is-danger ml-1">Back</Link>
           </div>
         </form>
       </div>
