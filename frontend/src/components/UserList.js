@@ -15,11 +15,28 @@ const getUsers = async () =>{
 }
 
 const deleteUser = async (id) =>{
+  // try {
+  //     await axios.delete(`http://localhost:5000/users/${id}`);
+  //     getUsers();
+  // } catch (error) {
+  //     console.log(error);
+  // }
+
   try {
+    const confirmation = window.confirm('Apakah anda yakin ingin menghapus data ini?');
+    if (confirmation) {
       await axios.delete(`http://localhost:5000/users/${id}`);
       getUsers();
+      console.log('Berhasil menghapus data');
+    } else {
+      console.log('Penghapusan pengguna dibatalkan');
+    }
   } catch (error) {
+    if (error.response) {
+      alert(error.response.data.msg);
+    } else {
       console.log(error);
+    }
   }
 }
 
