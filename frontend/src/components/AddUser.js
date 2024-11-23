@@ -32,19 +32,19 @@ const AddUser = () => {
       <div className="column is-half">
         <form onSubmit={saveUser}>
           <div className="field">
-            <div className="label">Name</div>
+            <label className="label">Name</label>
             <div className="control">
               <input type="text" className="input" value={name} onChange={(e) => setName(e.target.value)} placeholder='Name' />
             </div>
           </div>
           <div className="field">
-            <div className="label">Email</div>
+            <label className="label">Email</label>
             <div className="control">
               <input type="text" className="input" value={email} onChange={(e) => setEmail(e.target.value)} placeholder='Email' />
             </div>
           </div>
           <div className="field">
-            <div className="label">Gender</div>
+            <label className="label">Gender</label>
             <div className="control">
               <div className="select is-fullwidth">
                 <select value={gender} onChange={(e) => setGender(e.target.value)}>
@@ -55,7 +55,7 @@ const AddUser = () => {
             </div>
           </div>
           <div className="field">
-            <div className="label">Photo Profile</div>
+            <label className="label">Photo Profile</label>
             <div className="control">
               <input type="file" className="input" onChange={(e) => setPhotoProfile(e.target.files[0])} />
             </div>
