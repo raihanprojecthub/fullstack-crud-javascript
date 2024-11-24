@@ -1,5 +1,6 @@
 import multer from 'multer';
 import User from "../models/UserModel.js";
+import fs from "fs";
 import path from 'path';
 
 // Setup multer untuk menyimpan file di folder `uploads`
@@ -65,11 +66,34 @@ export const updateUser = [
 
 export const deleteUser = async (req, res) => {
   try {
-    await User.destroy({
-      where: { id: req.params.id }
+    const user = await User.findOne({
+      where: {
+        id: req.params.id
+      }
     });
-    res.status(200).json({ msg: "User Deleted" });
+
+    if (!user) return res.status(404).json({ msg: "User tidak ditemukan" });
+
+    if (user.photoProfile) {
+      const filePath = path.join("uploads", user.photoProfile);
+      fs.unlink(filePath, (err) => {
+        if (err) {
+          console.error("Gagal menghapus file:", err);
+        } else {
+          console.log("File berhasil dihapus:", filePath);
+        }
+      });
+    }
+
+    await User.destroy({
+      where: {
+        id: req.params.id
+      }
+    });
+
+    res.status(200).json({ msg: "User dan gambar berhasil dihapus" });
   } catch (error) {
     console.log(error.message);
+    res.status(500).json({ msg: "Terjadi kesalahan server" });
   }
-}
+};
