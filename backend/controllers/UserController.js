@@ -64,36 +64,24 @@ export const updateUser = [
   }
 ];
 
-export const deleteUser = async (req, res) => {
-  try {
+export const deleteUser = async(req, res)=>{
     const user = await User.findOne({
-      where: {
-        id: req.params.id
-      }
-    });
-
-    if (!user) return res.status(404).json({ msg: "User tidak ditemukan" });
-
-    if (user.photoProfile) {
-      const filePath = path.join("uploads", user.photoProfile);
-      fs.unlink(filePath, (err) => {
-        if (err) {
-          console.error("Gagal menghapus file:", err);
-        } else {
-          console.log("File berhasil dihapus:", filePath);
+        where:{
+            id : req.params.id
         }
-      });
-    }
-
-    await User.destroy({
-      where: {
-        id: req.params.id
-      }
     });
+    if(!user) return res.status(404).json({msg: "No Data Found"});
 
-    res.status(200).json({ msg: "User dan gambar berhasil dihapus" });
-  } catch (error) {
-    console.log(error.message);
-    res.status(500).json({ msg: "Terjadi kesalahan server" });
-  }
-};
+    try {
+        const filepath = `./uploads/${user.image}`;
+        fs.unlinkSync(filepath);
+        await User.destroy({
+            where:{
+                id : req.params.id
+            }
+        });
+        res.status(200).json({msg: "User Deleted Successfuly"});
+    } catch (error) {
+        console.log(error.message);
+    }
+}
