@@ -1,63 +1,52 @@
-import React, { useState } from 'react';
+import React,{useState} from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 
 const AddUser = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [gender, setGender] = useState("Male");
-  const [photoProfile, setPhotoProfile] = useState(null);
-  const navigate = useNavigate();
+const [name, setName] = useState("");
+const [email, setEmail] = useState("");
+const [gender, setGender] = useState("Male");
+const navigate = useNavigate();
 
-  const saveUser = async (e) => {
-    e.preventDefault();
-    const formData = new FormData();
-    formData.append("name", name);
-    formData.append("email", email);
-    formData.append("gender", gender);
-    formData.append("photoProfile", photoProfile);
-
-    try {
-      await axios.post('http://localhost:5000/users', formData, {
-        headers: { 'Content-Type': 'multipart/form-data' }
+const saveUser = async (e) =>{
+  e.preventDefault();
+  try {
+      await axios.post('http://localhost:5000/users',{
+        name,
+        email,
+        gender
       });
       navigate("/");
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  } catch (error) {
+    console.log(error);
+  }
+};
 
   return (
     <div className="columns mt-5 is-centered">
       <div className="column is-half">
         <form onSubmit={saveUser}>
           <div className="field">
-            <label className="label">Name</label>
+            <div className="label">Name</div>
             <div className="control">
-              <input type="text" className="input" value={name} onChange={(e) => setName(e.target.value)} placeholder='Name' />
+              <input type="text" className="input" value={name} onChange={(e)=> setName(e.target.value)} placeholder='Name'/>
             </div>
           </div>
           <div className="field">
-            <label className="label">Email</label>
+            <div className="label">Email</div>
             <div className="control">
-              <input type="text" className="input" value={email} onChange={(e) => setEmail(e.target.value)} placeholder='Email' />
+              <input type="text" className="input" value={email} onChange={(e)=> setEmail(e.target.value)} placeholder='Email'/>
             </div>
           </div>
           <div className="field">
-            <label className="label">Gender</label>
+            <div className="label">Gender</div>
             <div className="control">
               <div className="select is-fullwidth">
-                <select value={gender} onChange={(e) => setGender(e.target.value)}>
+                <select value={gender} onChange={(e)=> setGender(e.target.value)}>
                   <option value="Male">Male</option>
                   <option value="Female">Female</option>
                 </select>
               </div>
-            </div>
-          </div>
-          <div className="field">
-            <label className="label">Photo Profile</label>
-            <div className="control">
-              <input type="file" className="input" onChange={(e) => setPhotoProfile(e.target.files[0])} />
             </div>
           </div>
           <div className="field">
@@ -70,4 +59,4 @@ const AddUser = () => {
   )
 }
 
-export default AddUser;
+export default AddUser
